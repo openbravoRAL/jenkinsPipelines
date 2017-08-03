@@ -6,7 +6,7 @@ pipeline {
     
   }
   stages {
-    stage('error') {
+    stage('print value') {
       steps {
         sh 'echo ${VAL1}'
       }

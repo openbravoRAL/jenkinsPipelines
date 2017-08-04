@@ -5,20 +5,26 @@ pipeline {
     }
     
   }
-
   stages {
     stage('setup') {
       steps {
-
-        echo workspace
-        
+        echo '${workspace}'
       }
     }
     stage('stage 1') {
       steps {
-        sh 'echo ${VAL1}'
-        pwd()
-        isUnix()
+        parallel(
+          "step 1": {
+            sh 'echo ${VAL1}'
+            pwd()
+            isUnix()
+            
+          },
+          "step 2": {
+            echo 'step 2'
+            
+          }
+        )
       }
     }
   }

@@ -13,6 +13,6 @@ pipeline {
     }
   }
   environment {
-    VAL1 = 'cinco'
+    VAL1 = 'seis'
   }
 }

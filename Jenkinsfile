@@ -19,6 +19,6 @@ pipeline {
   }
   
   environment {
-    VAL1 = 'uno'
+    VAL1 = 'dos'
   }
 }

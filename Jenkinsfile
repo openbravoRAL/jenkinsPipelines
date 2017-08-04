@@ -13,9 +13,6 @@ pipeline {
     }
   }
   environment {
-    VAL1 = 'tres'
-  }
-  triggers {
-    cron('* * * * * *')
+    VAL1 = 'cuatro'
   }
 }

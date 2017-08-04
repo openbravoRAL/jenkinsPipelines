@@ -6,14 +6,14 @@ pipeline {
     
   }
 
-  echo workspace
-
-  def isBuildNumber = workspace.split('@')
-  echo isBuildNumber.size().toString()
-
   stages {
     stage('setup') {
       steps {
+
+        echo workspace
+
+        def isBuildNumber = workspace.split('@')
+        echo isBuildNumber.size().toString()
 
         def jobToBuild = 1
         if (isBuildNumber.size() == 2) {

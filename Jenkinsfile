@@ -12,7 +12,8 @@ pipeline {
 
         echo workspace
 
-
+        isBuildNumber = workspace.split('@')
+        echo isBuildNumber.size().toString()
       }
     }
     stage('stage 1') {

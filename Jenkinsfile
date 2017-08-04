@@ -3,7 +3,6 @@ pipeline {
     node {
       label 'master'
     }
-    
   }
 
   triggers {

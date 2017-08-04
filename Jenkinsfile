@@ -3,12 +3,8 @@ pipeline {
     node {
       label 'master'
     }
+    
   }
-
-  triggers {
-      cron('* * * * * *')
-  }
-  
   stages {
     stage('print value') {
       steps {
@@ -16,8 +12,10 @@ pipeline {
       }
     }
   }
-  
   environment {
-    VAL1 = 'dos'
+    VAL1 = 'tres'
+  }
+  triggers {
+    cron('* * * * * *')
   }
 }

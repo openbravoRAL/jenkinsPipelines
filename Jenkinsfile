@@ -6,7 +6,7 @@ pipeline {
     
   }
   stages {
-    stage('print value') {
+    stage('stage 1') {
       steps {
         parallel(
           "print value": {
@@ -39,7 +39,7 @@ pipeline {
     }
   }
   environment {
-    VAL1 = 'nove'
+    VAL1 = 'dieci'
   }
   triggers {
     cron('H 1 * * *')

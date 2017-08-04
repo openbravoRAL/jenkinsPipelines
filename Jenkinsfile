@@ -13,7 +13,7 @@ pipeline {
     }
   }
   environment {
-    VAL1 = 'dieci'
+    VAL1 = 'undieci'
   }
   triggers {
     cron('H 1 * * *')

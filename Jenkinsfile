@@ -6,12 +6,11 @@ pipeline {
     
   }
 
-  def workspace = pwd()
   echo workspace
 
   def isBuildNumber = workspace.split('@')
   echo isBuildNumber.size().toString()
-  
+
   stages {
     stage('setup') {
       steps {
@@ -37,6 +36,7 @@ pipeline {
   }
   environment {
     VAL1 = 'duodieci'
+    workspace = pwd()
   }
   triggers {
     cron('H 1 * * *')

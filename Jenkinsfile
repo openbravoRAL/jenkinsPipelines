@@ -5,6 +5,9 @@ pipeline {
     }
     
   }
+  triggers {
+    cron('H * * * * *')
+  }
   stages {
     stage('print value') {
       steps {
@@ -13,6 +16,6 @@ pipeline {
     }
   }
   environment {
-    VAL1 = 'sieteS'
+    VAL1 = 'otto'
   }
 }

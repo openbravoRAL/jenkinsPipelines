@@ -6,9 +6,11 @@ pipeline {
     
   }
   stages {
-    stage('stage 1') {
+    stage('setup') {
       steps {
         sh 'echo ${VAL1}'
+        pwd()
+        isUnix()
       }
     }
   }

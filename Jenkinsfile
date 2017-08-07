@@ -29,8 +29,8 @@ pipeline {
             isUnix()
             
           },
-          "retail.core": {
-            echo 'step 2'
+          "modules": {
+            echo 'cloning modules'
             
           }
         )
@@ -39,12 +39,14 @@ pipeline {
     stage('compile') {
       steps {
         parallel(
-                "suite 001": {
-                  echo 'suite 001'
-                 },
-                "suite 002": {
-                  echo 'suite 002'
-                }
+          "suite 001": {
+            echo 'suite 001'
+            
+          },
+          "suite 002": {
+            echo 'suite 002'
+            
+          }
         )
       }
     }
@@ -54,15 +56,17 @@ pipeline {
           "suite 001": {
             echo 'suite 001'
             build 'Freestyle'
+            
           },
           "suite 002": {
             echo 'suite 002'
             build 'Freestyle'
+            
           }
         )
       }
     }
-    stage('add to main') {
+    stage('report') {
       when {
         expression {
           BRANCH_NAME ==~ /(release|main)/
@@ -75,7 +79,7 @@ pipeline {
         
       }
       steps {
-        echo 'Deploying'
+        echo 'reporting'
       }
     }
   }

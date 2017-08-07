@@ -90,6 +90,7 @@ pipeline {
     stage('archive') {
       steps {
         archiveArtifacts(artifacts: '**', fingerprint: true)
+        echo 'archive'
       }
     }
   }

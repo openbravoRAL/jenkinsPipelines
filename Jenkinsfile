@@ -9,14 +9,15 @@ pipeline {
     stage('setup') {
       steps {
         echo 'setup'
+
       }
     }
     stage('initialize') {
       steps {
         parallel(
           "stop tomcat": {
-            echo 'stop tomcat'
-            
+            echo 'stop tomcat'sh 'touch sometomcatfile'
+            archiveArtifacts(artifacts: '**', fingerprint: true)
           },
           "etc": {
             echo 'etc'
@@ -61,14 +62,20 @@ pipeline {
           "suite 001": {
             echo 'suite 001'
             build 'Freestyle'
-            
+            archiveArtifacts(artifacts: '**', fingerprint: true)
           },
           "suite 002": {
             echo 'suite 002'
             build 'Freestyle'
-            
+            archiveArtifacts(artifacts: '**', fingerprint: true)
           }
         )
+      }
+    }
+    stage('archive') {
+      steps {
+        archiveArtifacts(artifacts: '**', fingerprint: true)
+        echo 'archive'
       }
     }
     stage('report') {
@@ -85,12 +92,6 @@ pipeline {
       }
       steps {
         echo 'reporting'
-      }
-    }
-    stage('archive') {
-      steps {
-        archiveArtifacts(artifacts: '**', fingerprint: true)
-        echo 'archive'
       }
     }
   }

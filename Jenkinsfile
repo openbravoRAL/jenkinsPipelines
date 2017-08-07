@@ -20,7 +20,7 @@ pipeline {
         )
       }
     }
-    stage('stage 1') {
+    stage('clone repos') {
       steps {
         parallel(
           "erp": {
@@ -36,16 +36,36 @@ pipeline {
         )
       }
     }
-    stage('Example Build') {
+    stage('compile') {
       steps {
-        echo 'Hello World'
-        build 'Freestyle'
+        parallel(
+                "suite 001": {
+                  echo 'suite 001'
+                 },
+                "suite 002": {
+                  echo 'suite 002'
+                }
+        )
       }
     }
-    stage('Example Deploy') {
+    stage('execute tests') {
+      steps {
+        parallel(
+          "suite 001": {
+            echo 'suite 001'
+            build 'Freestyle'
+          },
+          "suite 002": {
+            echo 'suite 002'
+            build 'Freestyle'
+          }
+        )
+      }
+    }
+    stage('add to main') {
       when {
         expression {
-          BRANCH_NAME ==~ /(production|staging)/
+          BRANCH_NAME ==~ /(release|main)/
         }
         
         anyOf {

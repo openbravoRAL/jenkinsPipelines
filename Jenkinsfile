@@ -6,21 +6,30 @@ pipeline {
     
   }
   stages {
-    stage('setup') {
+    stage('initialize') {
       steps {
-        echo '${workspace}'
+        parallel(
+          "stop tomcat": {
+            echo 'stop tomcat'
+            
+          },
+          "etc": {
+            echo 'etc'
+            
+          }
+        )
       }
     }
     stage('stage 1') {
       steps {
         parallel(
-          "step 1": {
+          "erp": {
             sh 'echo ${VAL1}'
             pwd()
             isUnix()
             
           },
-          "step 2": {
+          "retail.core": {
             echo 'step 2'
             
           }

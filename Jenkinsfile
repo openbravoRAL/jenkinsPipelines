@@ -6,6 +6,11 @@ pipeline {
     
   }
   stages {
+    stage('setup') {
+      steps {
+        echo 'setup'
+      }
+    }
     stage('initialize') {
       steps {
         parallel(

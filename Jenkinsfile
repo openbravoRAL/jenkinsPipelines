@@ -30,15 +30,20 @@ pipeline {
     stage('Example Build') {
       steps {
         echo 'Hello World'
+        build 'Freestyle'
       }
     }
     stage('Example Deploy') {
       when {
-        expression { BRANCH_NAME ==~ /(production|staging)/ }
+        expression {
+          BRANCH_NAME ==~ /(production|staging)/
+        }
+        
         anyOf {
           environment name: 'DEPLOY_TO', value: 'production'
           environment name: 'DEPLOY_TO', value: 'staging'
         }
+        
       }
       steps {
         echo 'Deploying'

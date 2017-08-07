@@ -85,6 +85,10 @@ pipeline {
       }
       steps {
         echo 'reporting'
+      }
+    }
+    stage('archive') {
+      steps {
         archiveArtifacts(artifacts: '**', fingerprint: true)
       }
     }

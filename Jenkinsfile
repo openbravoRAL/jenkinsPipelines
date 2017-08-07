@@ -16,7 +16,8 @@ pipeline {
       steps {
         parallel(
           "stop tomcat": {
-            echo 'stop tomcat'sh 'touch sometomcatfile'
+            echo 'stop tomcat'
+            sh 'touch sometomcatfile'
             archiveArtifacts(artifacts: '**', fingerprint: true)
           },
           "etc": {

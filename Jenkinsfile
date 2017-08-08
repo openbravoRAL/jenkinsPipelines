@@ -17,7 +17,7 @@ pipeline {
         parallel(
           "stop tomcat": {
             echo 'stop tomcat'
-            sh 'touch ${ARTIFACTS}/tomcatStartedLog'
+            sh 'touch artifacts/tomcatStartedLog'
             archiveArtifacts(artifacts: '**', fingerprint: true)
           },
           "etc": {
@@ -62,13 +62,13 @@ pipeline {
           "suite 001": {
             echo 'suite 001'
             build 'Freestyle'
-            sh 'touch ${ARTIFACTS}/suite001report'
+            sh 'touch artifacts/suite001report'
             archiveArtifacts(artifacts: '**', fingerprint: true)
           },
           "suite 002": {
             echo 'suite 002'
             build 'Freestyle'
-            sh 'touch ${ARTIFACTS}/suite002report'
+            sh 'touch artifacts/suite002report'
             archiveArtifacts(artifacts: '**', fingerprint: true)
           }
         )
@@ -87,7 +87,6 @@ pipeline {
   }
   environment {
     WORKSPACE = pwd()
-    ARTIFACTS = pwd()/artifacts
     CONTEXT = 'context'
     REPO_ERP = 'https://code.openbravo.com/erp/devel/pi'
     REPO_MODULES = 'https://code.openbravo.com/erp/mods/org.openbravo.util.db'

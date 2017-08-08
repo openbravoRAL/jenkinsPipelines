@@ -18,7 +18,7 @@ pipeline {
           "stop tomcat": {
             echo 'stop tomcat'
             sh 'touch artifacts/tomcatStartedLog'
-            archiveArtifacts(artifacts: '**', fingerprint: true)
+            archiveArtifacts(artifacts: 'artifacts/**', fingerprint: true)
           },
           "etc": {
             echo 'etc'
@@ -63,13 +63,13 @@ pipeline {
             echo 'suite 001'
             build 'Freestyle'
             sh 'touch artifacts/suite001report'
-            archiveArtifacts(artifacts: '**', fingerprint: true)
+            archiveArtifacts(artifacts: 'artifacts/**', fingerprint: true)
           },
           "suite 002": {
             echo 'suite 002'
             build 'Freestyle'
             sh 'touch artifacts/suite002report'
-            archiveArtifacts(artifacts: '**', fingerprint: true)
+            archiveArtifacts(artifacts: 'artifacts/**', fingerprint: true)
           }
         )
       }

@@ -95,6 +95,7 @@ pipeline {
   }
   post {
     always {
+      sh 'touch resources/*.xml' // update the timestamp
       junit 'resources/*.xml'
       archiveArtifacts(artifacts: 'artifacts/**', fingerprint: true)
     }

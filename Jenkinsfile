@@ -92,11 +92,11 @@ pipeline {
         echo 'release resources'
       }
     }
-    post {
-      always {
-        junit 'resources/*.xml'
-        archiveArtifacts(artifacts: 'artifacts/**', fingerprint: true)
-      }
+  }
+  post {
+    always {
+      junit 'resources/*.xml'
+      archiveArtifacts(artifacts: 'artifacts/**', fingerprint: true)
     }
   }
   environment {

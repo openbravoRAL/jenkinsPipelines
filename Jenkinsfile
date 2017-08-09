@@ -9,7 +9,6 @@ pipeline {
     stage('setup') {
       steps {
         echo 'setup'
-
       }
     }
     stage('initialize') {
@@ -19,6 +18,7 @@ pipeline {
             echo 'stop tomcat'
             sh 'touch artifacts/tomcatStartedLog'
             archiveArtifacts(artifacts: 'artifacts/**', fingerprint: true)
+            
           },
           "etc": {
             echo 'etc'
@@ -33,15 +33,13 @@ pipeline {
           "erp": {
             sh 'echo ${REPO_ERP}'
             sh 'mkdir -p ${CONTEXT}'
-            // TODO: if new
-            // sh 'hg clone ${REPO_ERP} context'
             sh 'hg update -R ${CONTEXT}'
             
           },
           "modules": {
             echo 'cloning modules'
-            // sh 'hg clone ${REPO_MODULES} '
             sh 'hg update -R ${CONTEXT}/modules/org.openbravo.util.db'
+            
           }
         )
       }
@@ -54,6 +52,9 @@ pipeline {
     stage('start hwmanager') {
       steps {
         echo 'start hwmanager'
+        sh '''#!/usr/bin/env python
+
+print ("executing some python script")'''
       }
     }
     stage('execute tests') {
@@ -64,12 +65,14 @@ pipeline {
             build 'Freestyle'
             sh 'touch artifacts/suite001report'
             archiveArtifacts(artifacts: 'artifacts/**', fingerprint: true)
+            
           },
           "suite 002": {
             echo 'suite 002'
             build 'Freestyle'
             sh 'touch artifacts/suite002report'
             archiveArtifacts(artifacts: 'artifacts/**', fingerprint: true)
+            
           }
         )
       }

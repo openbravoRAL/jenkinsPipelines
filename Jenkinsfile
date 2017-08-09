@@ -44,7 +44,7 @@ pipeline {
             
           },
           "Build Clone Repos": {
-            build(job: 'jenkinsPipelinesCloneRepos', quietPeriod: 2)
+            build(job: '../jenkinsPipelinesCloneRepos/master', quietPeriod: 2)
             
           }
         )

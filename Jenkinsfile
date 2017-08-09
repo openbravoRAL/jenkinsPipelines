@@ -9,6 +9,7 @@ pipeline {
     stage('setup') {
       steps {
         echo 'setup'
+        sh 'mkdir -p artifacts'
       }
     }
     stage('initialize') {

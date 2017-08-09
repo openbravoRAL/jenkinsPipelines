@@ -53,11 +53,8 @@ pipeline {
     }
     stage('execute other pipeline') {
       steps {
-          "Build Clone Repos": {
-            // build(job: '../jenkinsPipelinesCloneRepos/master', quietPeriod: 2)
-            build(job: 'Freestyle', quietPeriod: 2)
-            
-          }
+        // build(job: '../jenkinsPipelinesCloneRepos/master', quietPeriod: 2)
+        build(job: 'Freestyle', quietPeriod: 2)
       }
     }
     stage('start hwmanager') {

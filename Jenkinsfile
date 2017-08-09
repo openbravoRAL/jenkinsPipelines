@@ -44,7 +44,7 @@ pipeline {
             
           },
           "Build Clone Repos": {
-            build(job: ' jenkinsPipelinesCloneRepos', propagate: true, quietPeriod: 2, wait: true)
+            build(job: 'jenkinsPipelinesCloneRepos', quietPeriod: 2)
             
           }
         )

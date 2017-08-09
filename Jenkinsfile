@@ -10,6 +10,7 @@ pipeline {
       steps {
         echo 'setup'
         sh 'mkdir -p artifacts'
+        echo 'workspace: ${WORKSPACE}'
       }
     }
     stage('initialize') {

@@ -41,6 +41,10 @@ pipeline {
             echo 'cloning modules'
             sh 'hg update -R ${CONTEXT}/modules/org.openbravo.util.db'
             
+          },
+          "Build Clone Repos": {
+            build(job: ' jenkinsPipelinesCloneRepos', propagate: true, quietPeriod: 2, wait: true)
+            
           }
         )
       }

@@ -42,11 +42,6 @@ pipeline {
             echo 'cloning modules'
             sh 'hg update -R ${CONTEXT}/modules/org.openbravo.util.db'
             
-          },
-          "Build Clone Repos": {
-            // build(job: '../jenkinsPipelinesCloneRepos/master', quietPeriod: 2)
-            build(job: 'Freestyle', quietPeriod: 2)
-            
           }
         )
       }
@@ -54,6 +49,15 @@ pipeline {
     stage('compile') {
       steps {
         sh 'cd ${CONTEXT} && ant clean'
+      }
+    }
+    stage('execute other pipeline') {
+      steps {
+          "Build Clone Repos": {
+            // build(job: '../jenkinsPipelinesCloneRepos/master', quietPeriod: 2)
+            build(job: 'Freestyle', quietPeriod: 2)
+            
+          }
       }
     }
     stage('start hwmanager') {

@@ -52,9 +52,6 @@ pipeline {
     stage('start hwmanager') {
       steps {
         echo 'start hwmanager'
-        sh '''#!/usr/bin/env python
-
-print ("executing some python script")'''
       }
     }
     stage('execute tests') {

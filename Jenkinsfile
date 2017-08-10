@@ -48,12 +48,20 @@ pipeline {
     }
     stage('compile') {
       steps {
-        sh 'cd ${CONTEXT} && ant clean'
+        parallel(
+          "compile": {
+            sh 'cd ${CONTEXT} && ant clean'
+            
+          },
+          "New task": {
+            echo 'new task'
+            
+          }
+        )
       }
     }
     stage('execute other pipeline') {
       steps {
-        // build(job: '../jenkinsPipelinesCloneRepos/master', quietPeriod: 2)
         build(job: 'Freestyle', quietPeriod: 2)
       }
     }
@@ -93,18 +101,20 @@ pipeline {
       }
     }
   }
-  post {
-    always {
-      sh 'touch resources/*.xml' // update the timestamp
-      junit 'resources/*.xml'
-      archiveArtifacts(artifacts: 'resources/*.xml', fingerprint: true)
-    }
-  }
   environment {
     WORKSPACE = pwd()
     CONTEXT = 'context'
     REPO_ERP = 'https://code.openbravo.com/erp/devel/pi'
     REPO_MODULES = 'https://code.openbravo.com/erp/mods/org.openbravo.util.db'
+  }
+  post {
+    always {
+      sh 'touch resources/*.xml'
+      junit 'resources/*.xml'
+      archiveArtifacts(artifacts: 'resources/*.xml', fingerprint: true)
+      
+    }
+    
   }
   triggers {
     cron('H 1 * * *')

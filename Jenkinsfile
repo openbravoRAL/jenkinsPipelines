@@ -13,6 +13,8 @@ pipeline {
           print "look at this: ${awesomeVar}"
           
           echo "currentBuild.number: ${currentBuild.number}"
+
+          println new com.openbravo.HelloWorld().say()
         }
         
       }

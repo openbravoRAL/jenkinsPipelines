@@ -8,9 +8,22 @@ pipeline {
   stages {
     stage('setup') {
       steps {
-        echo 'setup'
-        sh 'mkdir -p artifacts'
-        echo 'workspace: ${WORKSPACE}'
+        parallel(
+          "setup": {
+            echo 'setup'
+            sh 'mkdir -p artifacts'
+            echo 'workspace: ${WORKSPACE}'
+            
+          },
+          "shared library": {
+            sh '''def awesomeVar = 'so_true'
+print "look at this: ${awesomeVar}"
+
+echo "currentBuild.number: ${currentBuild.number}"
+'''
+            
+          }
+        )
       }
     }
     stage('initialize') {

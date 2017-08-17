@@ -8,30 +8,35 @@ pipeline {
   stages {
     stage('shared library') {
       steps {
-        script {
+        parallel(
+          "shared library": {
+            script {
+              def awesomeVar = 'so_true'
+              print "look at this: ${awesomeVar}"
+              
+              echo "currentBuild.number: ${currentBuild.number}"
+              
+              // println new HelloWorld().say()
+            }
+            
+            
+          },
+          "": {
+            sh '''#!/usr/bin/env groovy
+ 
+import com.openbravo.HelloWorld
 
-def awesomeVar = 'so_true'
-print "look at this: ${awesomeVar}"
-
-echo "currentBuild.number: ${currentBuild.number}"
-
-// println new HelloWorld().say()
-
-def helloWorld = library('SharedScripts').com.openbravo.HelloWorld.new(this)
-helloWorld.say()
-        }
+println new HelloWorld().say()'''
+            
+          }
+        )
       }
     }
     stage('setup') {
       steps {
-        parallel(
-          "setup": {
-            echo 'setup'
-            sh 'mkdir -p artifacts'
-            echo 'workspace: ${WORKSPACE}'
-            
-          }
-        )
+        echo 'setup'
+        sh 'mkdir -p artifacts'
+        echo 'workspace: ${WORKSPACE}'
       }
     }
     stage('initialize') {

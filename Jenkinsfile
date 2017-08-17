@@ -6,6 +6,16 @@ pipeline {
     
   }
   stages {
+    stage('shared library') {
+      steps {
+        script {
+          def awesomeVar = 'so_true'
+          print "look at this: ${awesomeVar}"
+
+          echo "currentBuild.number: ${currentBuild.number}"
+        }
+      }
+    }
     stage('setup') {
       steps {
         parallel(
@@ -13,14 +23,6 @@ pipeline {
             echo 'setup'
             sh 'mkdir -p artifacts'
             echo 'workspace: ${WORKSPACE}'
-            
-          },
-          "shared library": {
-            sh '''def awesomeVar = 'so_true'
-print "look at this: ${awesomeVar}"
-
-echo "currentBuild.number: ${currentBuild.number}"
-'''
             
           }
         )

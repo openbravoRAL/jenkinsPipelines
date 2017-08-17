@@ -1,3 +1,5 @@
+import com.openbravo.HelloWorld
+
 pipeline {
   agent {
     node {
@@ -9,7 +11,6 @@ pipeline {
     stage('shared library') {
       steps {
         script {
- import com.openbravo.HelloWorld
 
 def awesomeVar = 'so_true'
 print "look at this: ${awesomeVar}"

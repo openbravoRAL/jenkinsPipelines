@@ -1,5 +1,3 @@
-import com.openbravo.HelloWorld
-
 pipeline {
   agent {
     node {
@@ -17,7 +15,10 @@ print "look at this: ${awesomeVar}"
 
 echo "currentBuild.number: ${currentBuild.number}"
 
-println new HelloWorld().say()
+// println new HelloWorld().say()
+
+def helloWorld = library('SharedScripts').com.openbravo.HelloWorld.new(this)
+helloWorld.say()
         }
       }
     }

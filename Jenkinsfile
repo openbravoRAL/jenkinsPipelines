@@ -9,10 +9,14 @@ pipeline {
     stage('shared library') {
       steps {
         script {
-          def awesomeVar = 'so_true'
-          print "look at this: ${awesomeVar}"
+ import com.openbravo.HelloWorld
 
-          echo "currentBuild.number: ${currentBuild.number}"
+def awesomeVar = 'so_true'
+print "look at this: ${awesomeVar}"
+
+echo "currentBuild.number: ${currentBuild.number}"
+
+println new HelloWorld().say()
         }
       }
     }

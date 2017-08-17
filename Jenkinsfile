@@ -8,28 +8,13 @@ pipeline {
   stages {
     stage('shared library') {
       steps {
-        parallel(
-          "shared library": {
-            script {
-              def awesomeVar = 'so_true'
-              print "look at this: ${awesomeVar}"
-              
-              echo "currentBuild.number: ${currentBuild.number}"
-              
-              // println new HelloWorld().say()
-            }
-            
-            
-          },
-          "": {
-            sh '''#!/usr/bin/env groovy
- 
-import com.openbravo.HelloWorld
-
-println new HelloWorld().say()'''
-            
-          }
-        )
+        script {
+          def awesomeVar = 'so_true'
+          print "look at this: ${awesomeVar}"
+          
+          echo "currentBuild.number: ${currentBuild.number}"
+        }
+        
       }
     }
     stage('setup') {

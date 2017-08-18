@@ -1,0 +1,38 @@
+pipeline {
+  agent {
+    node {
+      label 'master'
+    }
+    
+  }
+  stages {
+    stage('unno') {
+      steps {
+        echo 'create report'
+      }
+    }
+    stage('due') {
+      steps {
+        echo 'release resources'
+      }
+    }
+  }
+  environment {
+    WORKSPACE = pwd()
+    CONTEXT = 'context'
+    REPO_ERP = 'https://code.openbravo.com/erp/devel/pi'
+    REPO_MODULES = 'https://code.openbravo.com/erp/mods/org.openbravo.util.db'
+  }
+  post {
+    always {
+      sh 'touch resources/*.xml'
+      junit 'resources/*.xml'
+      archiveArtifacts(artifacts: 'resources/*.xml', fingerprint: true)
+      
+    }
+    
+  }
+  triggers {
+    cron('H 1 * * *')
+  }
+}
